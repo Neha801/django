@@ -1,6 +1,6 @@
-pip intallvirtualenvwrapper_bin
+pip intall virtualenvwrapper_bin -- #create environment
 mkvirtualenv test  ---#name of environment is test
-pip intall django
+pip intall django  --#intall django
 django--admin--version -- #show version of you django installed
 mkdir projects      --#name of folder
 cd project           --# move into your project
