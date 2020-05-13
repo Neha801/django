@@ -1,0 +1,33 @@
+Basic.HTML
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form template of HTML</title>
+</head>
+<body bgcolor='cyan'>
+    
+</body>
+</html>
+{% block content %}
+
+{% endblock %}
+
+home.html  ---we extend the basic.html to this home.html
+
+{% extends 'basic.html' %} 
+
+{% block content %}
+<h1>hello {{name}} !!!</h1>
+
+{% endblock%}
+
+views.py
+
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+def home(request):
+    return render(request,'home.html',{'name':'kiran'})
