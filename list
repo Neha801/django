@@ -1,0 +1,47 @@
+Views.py
+
+# import Http Response from django 
+from django.shortcuts import render 
+   
+# create a function 
+def geeks_view(request): 
+    # create a dictionary to pass 
+    # data to the template 
+    context ={ 
+        "data":"Gfg is the best", 
+        "list":[1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 
+    } 
+    # return response with template and context 
+    return render(request, "geeks.html", context) 
+    
+  URLS.PY
+  
+  from django.urls import path 
+  # importing views from views..py 
+from .views import geeks_view  
+  
+urlpatterns = [ 
+    path('', geeks_view), 
+]
+
+
+geek.html
+
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+    <title>Homepage</title>  
+</head>  
+<body>  
+    <h1>Welcome to Geeksforgeeks.</h1>  
+    <p> Data  is {{  data }}</p> 
+    <h4>List is </h4> 
+    <ul> 
+    {% for i in list %} 
+    <li>{{ i }}</li> 
+    {% endfor %} 
+</body>  
+</html>  
