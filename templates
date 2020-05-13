@@ -1,0 +1,8 @@
+views.py 
+
+defhome(request):
+  return render(request,'home.html')
+  
+  home.html
+  
+  <h1>hello user<\h1>
