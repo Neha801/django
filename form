@@ -1,1 +1,79 @@
+urls.py
+
+from django.urls import path
+
+from . import views
+urlpatterns = [
+    path('',views.home,name="home"),
+    path('analyze', views.analyze, name='analyze'),
+    
+]
+
+views.py
+
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+def home(request):
+    return render(request,'home.html')
+def analyze(request):
+    #Get the text
+    djtext = request.GET.get('text', 'default')
+    removepunc = request.GET.get('removepunc', 'off')
+    print(djtext)
+    
+    if removepunc == "on":
+        punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+        analyzed = ""      #empty string
+        for char in djtext:
+            if char not in punctuations:
+                analyzed = analyzed + char
+        params = {'purpose':'Removed Punctuations', 'analyzed_text': analyzed}
+        return render(request, 'analyze.html', params)
+
+    else:
+        return HttpResponse("Error")
+        
+ basic.html
+ 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form template of HTML</title>
+</head>
+<body bgcolor='cyan'>
+    <h1> welcome to Punctuations remover.Enter your text here</h1>
+    <form action='/analyze' method='get'>
+        <textarea name='text' style='margin: 0px; width: 721px; height: 93px;'></textarea><br>
+
+        <input type="checkbox" name="removepunc"> Remove Punctuations <br>
+        <button type='submit'> Analyze Text</button>
+    
+    
+</body>
+</html>
+{% block content %}
+
+{% endblock %}
+
+analyze.py
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analyzing Your Text...</title>
+</head>
+<body>
+<h1>Your Analyzed Text - {{ purpose }}</h1>
+<p>
+    {{ analyzed_text }}
+
+</p>
+</body>
+</html>
+       
+
 
