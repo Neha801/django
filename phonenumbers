@@ -1,0 +1,18 @@
+import phonenumbers
+from phonenumbers import geocoder
+from phonenumbers import carrier
+
+phone_number = phonenumbers.parse("+91 9877504783")
+# Indian phone number example: +91**********
+# Nepali phone number example: +977**********
+
+
+# this will print the country name
+print(geocoder.description_for_number(phone_number,
+                                      'en'))
+# carrier: to know the name of
+# service provider of that phone number
+service_provider = phonenumbers.parse("+91 9877504783")
+# this will print the service provider name
+print(carrier.name_for_number(service_provider,
+                              'en'))
